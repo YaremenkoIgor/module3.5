@@ -1,0 +1,30 @@
+<project name="ant-semaphore" basedir=".">
+
+    <property name="src" value="src/main/java"/>
+    <property name="build" value="build"/>
+    <property name="dest" value="dest"/>
+
+    <target name="init" description="init project structure">
+        <mkdir dir="${build}"/>
+        <mkdir dir="${dest}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${src}" destdir="${build}" source="1.8" target="1.8"/>
+    </target>
+
+    <target name="dest" depends="compile">
+        <jar destfile="${dest}/ant-semaphore.jar">
+            <fileset dir="${build}"/>
+            <manifest>
+                <attribute name="Main-Class" value="Bootstrap"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build}"/>
+        <delete dir="${dest}"/>
+    </target>
+
+</project>
